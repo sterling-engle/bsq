@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_gestion.c                                   :+:      :+:    :+:   */
+/*   new_square.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sengle <sengle@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:39:04 by sengle            #+#    #+#             */
-/*   Updated: 2019/08/01 04:50:29 by sengle           ###   ########.fr       */
+/*   Updated: 2019/08/01 10:10:29 by sengle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-t_square		*square_init(void)
+t_square		*new_square(void)
 {
 	t_square	*square;
 	t_coord		*start;
@@ -27,7 +27,7 @@ t_square		*square_init(void)
 	return (square);
 }
 
-t_coord			*create_obstacle(t_coord *xy)
+static t_coord	*new_obstacle(t_coord *xy)
 {
 	t_coord *obstacle;
 
@@ -48,13 +48,13 @@ void			push_back(t_coord **begin, t_coord *xy)
 
 	if (*begin == 0)
 	{
-		*begin = create_obstacle(xy);
+		*begin = new_obstacle(xy);
 		xy->next = *begin;
 	}
 	else
 	{
 		tmp = xy->next;
-		obstacle = create_obstacle(xy);
+		obstacle = new_obstacle(xy);
 		while (tmp->next != 0)
 		{
 			tmp = tmp->next;

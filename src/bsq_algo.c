@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo_bsq.c                                         :+:      :+:    :+:   */
+/*   bsq_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sengle <sengle@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:37:05 by sengle            #+#    #+#             */
-/*   Updated: 2019/08/01 01:31:03 by sengle           ###   ########.fr       */
+/*   Updated: 2019/08/01 10:11:15 by sengle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_square		*bsq_algo(t_coord **list, t_grid *grid)
 	t_square		*temp;
 	short			opti;
 
-	temp = square_init();
-	max = square_init();
+	temp = new_square();
+	max = new_square();
 	currenty = 0;
 	while (currenty < (grid->y - max->length))
 	{
