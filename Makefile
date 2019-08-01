@@ -6,29 +6,27 @@
 #    By: sengle <sengle@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/31 22:36:17 by sengle            #+#    #+#              #
-#    Updated: 2019/07/31 22:56:18 by sengle           ###   ########.fr        #
+#    Updated: 2019/08/01 04:33:26 by sengle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	bsq
 
 SRCS	=	./src/main.c \
-			./src/algo_bsq.c \
+			./src/bsq_algo.c \
 			./src/display.c \
 			./src/grid.c \
 			./src/struct_gestion.c \
-			./src/bsq.c \
 			./src/input.c \
-			./src/read.c
+			./src/read_map.c
 
 OBJS	=	./main.o \
-			./algo_bsq.o \
+			./bsq_algo.o \
 			./display.o \
 			./grid.o \
 			./struct_gestion.o \
-			./bsq.o \
 			./input.o \
-			./read.o
+			./read_map.o
 
 FLAGS	=	-g -Werror -Wall -Wextra
 
@@ -36,7 +34,7 @@ INCS	=	./include
 
 $(NAME):	all
 
-all:
+all:		$(SRCS)
 			gcc -c $(FLAGS) $(SRCS) -I $(INCS) 
 			gcc -o $(NAME) $(FLAGS) $(OBJS)
 

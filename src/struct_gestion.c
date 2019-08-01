@@ -6,26 +6,11 @@
 /*   By: sengle <sengle@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:39:04 by sengle            #+#    #+#             */
-/*   Updated: 2019/07/31 22:39:06 by sengle           ###   ########.fr       */
+/*   Updated: 2019/08/01 04:50:29 by sengle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
-
-t_uns			list_length(t_coord **begin)
-{
-	t_coord		*list;
-	t_uns		i;
-
-	list = *begin;
-	i = 0;
-	while (list)
-	{
-		i++;
-		list = list->next;
-	}
-	return (i);
-}
 
 t_square		*square_init(void)
 {
@@ -42,39 +27,39 @@ t_square		*square_init(void)
 	return (square);
 }
 
-t_coord			*create_mine(t_coord *xy)
+t_coord			*create_obstacle(t_coord *xy)
 {
-	t_coord *mine;
+	t_coord *obstacle;
 
-	mine = (t_coord*)malloc(sizeof(t_coord));
-	if (mine)
+	obstacle = (t_coord*)malloc(sizeof(t_coord));
+	if (obstacle)
 	{
-		mine->x = xy->x - 1;
-		mine->y = xy->y - 1;
-		mine->next = 0;
+		obstacle->x = xy->x - 1;
+		obstacle->y = xy->y - 1;
+		obstacle->next = 0;
 	}
-	return (mine);
+	return (obstacle);
 }
 
 void			push_back(t_coord **begin, t_coord *xy)
 {
-	t_coord *mine;
+	t_coord *obstacle;
 	t_coord *tmp;
 
 	if (*begin == 0)
 	{
-		*begin = create_mine(xy);
+		*begin = create_obstacle(xy);
 		xy->next = *begin;
 	}
 	else
 	{
 		tmp = xy->next;
-		mine = create_mine(xy);
+		obstacle = create_obstacle(xy);
 		while (tmp->next != 0)
 		{
 			tmp = tmp->next;
 		}
-		xy->next = mine;
-		tmp->next = mine;
+		xy->next = obstacle;
+		tmp->next = obstacle;
 	}
 }

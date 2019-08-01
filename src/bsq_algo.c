@@ -6,19 +6,19 @@
 /*   By: sengle <sengle@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:37:05 by sengle            #+#    #+#             */
-/*   Updated: 2019/07/31 22:37:08 by sengle           ###   ########.fr       */
+/*   Updated: 2019/08/01 01:31:03 by sengle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-void				adjust_list_mine(t_uns *y, t_coord **list)
+static void		bsq_adjust_list_mine(t_uns *y, t_coord **list)
 {
 	while (((*list) && (*list)->y < *y))
 		(*list) = (*list)->next;
 }
 
-short				check_bomb(t_uns *x, t_uns *y, t_uns length, t_coord **list)
+static short	bsq_bomb_check(t_uns *x, t_uns *y, t_uns length, t_coord **list)
 {
 	t_coord		*mine;
 	short		result;
@@ -37,7 +37,7 @@ short				check_bomb(t_uns *x, t_uns *y, t_uns length, t_coord **list)
 	return (result);
 }
 
-t_square		*algo_bsq(t_coord **list, t_grid *grid)
+t_square		*bsq_algo(t_coord **list, t_grid *grid)
 {
 	t_uns			currentx;
 	t_uns			currenty;
@@ -53,11 +53,11 @@ t_square		*algo_bsq(t_coord **list, t_grid *grid)
 		currentx = 0;
 		while (currentx < (grid->x - max->length))
 		{
-			adjust_list_mine(&currenty, list);
+			bsq_adjust_list_mine(&currenty, list);
 			temp->start->x = currentx;
 			temp->start->y = currenty;
 			temp->length = max->length + 1;
-			opti = check_bomb(&currentx, &currenty, temp->length, list);
+			opti = bsq_bomb_check(&currentx, &currenty, temp->length, list);
 			while (temp->length <= (grid->x - currentx)
 					&& temp->length <= (grid->y - currenty)
 					&& (opti == -1))		
@@ -66,7 +66,7 @@ t_square		*algo_bsq(t_coord **list, t_grid *grid)
 				max->start->y = temp->start->y;
 				max->length = temp->length;
 				temp->length++;
-				opti = check_bomb(&currentx, &currenty, temp->length, list);
+				opti = bsq_bomb_check(&currentx, &currenty, temp->length, list);
 			}
 			if (opti != -1 && opti > currentx)
 				currentx = opti;
